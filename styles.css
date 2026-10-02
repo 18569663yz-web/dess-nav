@@ -1,0 +1,557 @@
+/* ============================================================================
+   Dess · 工具索引
+   单文件样式表。没有外部字体、没有第三方脚本、没有图片请求。
+   ========================================================================== */
+
+/* ── 设计变量 ───────────────────────────────────────────────────────────── */
+:root {
+  color-scheme: dark;
+
+  --bg:            #0b0b0d;
+  --bg-lift:       #121216;
+  --ink:           #eceae6;
+  --ink-2:         #a4a3aa;
+  --ink-3:         #6c6b75;
+  --line:          #1e1e25;
+  --line-2:        #2c2c36;
+  --grid:          #16161b;
+  --accent:        #e0a45c;
+  --accent-soft:   rgba(224, 164, 92, .09);
+  --accent-line:   rgba(224, 164, 92, .34);
+  --ok:            #63c084;
+  --bad:           #d97066;
+
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+          "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans SC", sans-serif;
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Mono", Menlo,
+          Consolas, "Liberation Mono", monospace;
+
+  --maxw: 800px;
+  --ease: cubic-bezier(.22, .61, .36, 1);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --bg:            #f7f5f2;
+  --bg-lift:       #fdfdfc;
+  --ink:           #17171a;
+  --ink-2:         #55545c;
+  --ink-3:         #74737b;
+  --line:          #e5e1db;
+  --line-2:        #d2cdc5;
+  --grid:          #eae7e1;
+  --accent:        #9d5c0c;
+  --accent-soft:   rgba(157, 92, 12, .07);
+  --accent-line:   rgba(157, 92, 12, .30);
+  --ok:            #2f8f4e;
+  --bad:           #b8453c;
+}
+
+/* ── 基础 ───────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  padding: 0 24px;
+  background-color: var(--bg);
+  /* 极淡的网格：给纯色背景一点手作的质地，不仔细看看不出来 */
+  background-image:
+    linear-gradient(to right,  var(--grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+  background-size: 64px 64px;
+  background-position: center top;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 15.5px;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* 网格只在顶部显形，往下化开 */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: linear-gradient(to bottom,
+              transparent 0,
+              color-mix(in srgb, var(--bg) 72%, transparent) 340px,
+              var(--bg) 760px);
+}
+
+.page { position: relative; z-index: 1; max-width: var(--maxw); margin: 0 auto; }
+
+::selection { background: var(--accent-line); color: var(--ink); }
+
+a { color: inherit; text-decoration: none; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+code {
+  font-family: var(--mono);
+  font-size: .88em;
+  padding: .1em .34em;
+  border: 1px solid var(--line-2);
+  border-radius: 4px;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+kbd {
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1;
+  min-width: 18px;
+  padding: 3px 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line-2);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  color: var(--ink-3);
+  background: var(--bg-lift);
+}
+
+/* ── 语言 ───────────────────────────────────────────────────────────────────
+   中英两套文案都写在页面里，靠 <html data-lang> 选一套显示。这么做的好处：
+   语言在首次绘制之前就定好了（boot.js 在 <head> 里同步跑），不会先出中文
+   再跳成英文；关掉 JS 也照样能看；切换是纯 CSS，立刻生效不用重排 DOM。
+   data-l 标的是"这段文字属于哪个语言"。 */
+:root[data-lang="zh"] [data-l="en"],
+:root[data-lang="en"] [data-l="zh"] { display: none !important; }
+
+/* 快捷键提示那行是 flex + gap 排的。让可见的那一半"消失"，里面的 kbd 和
+   文字就能直接当 .hint-line 的子项，间距和以前完全一样。 */
+.hint-line > [data-l] { display: contents; }
+
+.skip {
+  position: absolute;
+  left: -9999px;
+}
+.skip:focus {
+  left: 12px; top: 12px; z-index: 10;
+  padding: 8px 14px;
+  background: var(--accent); color: #0b0b0d;
+  border-radius: 6px; font-size: 13px;
+}
+
+/* ── 抬头 ───────────────────────────────────────────────────────────────── */
+.masthead { padding: 64px 0 0; }
+
+.who { display: flex; align-items: center; gap: 14px; }
+
+.mark {
+  display: grid;
+  place-items: center;
+  width: 46px; height: 46px;
+  flex: none;
+  border: 1px solid var(--line-2);
+  border-radius: 12px;
+  color: var(--accent);
+  background: var(--bg-lift);
+}
+
+.who-text h1 {
+  margin: 0;
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: -.022em;
+  line-height: 1.1;
+}
+
+.role {
+  margin: 3px 0 0;
+  font-size: 13px;
+  color: var(--ink-3);
+  letter-spacing: .005em;
+}
+
+.lede {
+  margin: 26px 0 0;
+  max-width: 58ch;
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+/* 联系方式：像一排字段，不像社交按钮 */
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 26px;
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+
+.contact a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 13px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition: border-color .18s var(--ease), color .18s var(--ease);
+}
+.contact a .k { color: var(--ink-3); font-size: 11px; letter-spacing: .07em; }
+.contact a .v { color: var(--ink-2); }
+.contact a:hover { border-bottom-color: var(--accent-line); }
+.contact a:hover .v { color: var(--accent); }
+
+/* ── 工具条 ─────────────────────────────────────────────────────────────── */
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 40px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--bg-lift) 82%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+.field { position: relative; flex: 1 1 220px; min-width: 0; }
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 11px;
+  height: 38px;
+  border: 1px solid var(--line-2);
+  border-radius: 9px;
+  background: var(--bg);
+  transition: border-color .18s var(--ease), box-shadow .18s var(--ease);
+}
+.search:focus-within {
+  border-color: var(--accent-line);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.mag { width: 17px; height: 17px; flex: none; color: var(--ink-3); }
+
+.search input {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+}
+.search input::placeholder { color: var(--ink-3); }
+.search input::-webkit-search-cancel-button { display: none; }
+
+.hint { flex: none; transition: opacity .15s var(--ease); }
+/* 输入框里有内容时让位给清除按钮 */
+.search[data-filled="1"] .hint { opacity: 0; pointer-events: none; }
+
+.clear {
+  position: absolute;
+  right: 9px; top: 50%;
+  transform: translateY(-50%);
+  width: 22px; height: 22px;
+  display: grid;
+  place-items: center;
+  border: 0; border-radius: 50%;
+  background: var(--line-2);
+  color: var(--ink-2);
+  font-size: 15px; line-height: 1;
+  cursor: pointer;
+  transition: background .15s var(--ease), color .15s var(--ease);
+}
+.clear:hover { background: var(--line-2); color: var(--ink); }
+/* 作者样式里的 display 会盖掉 UA 的 [hidden]{display:none}，必须显式补回来 */
+.clear[hidden] { display: none; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.chip {
+  height: 30px;
+  padding: 0 12px;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  background: none;
+  color: var(--ink-2);
+  font-family: var(--sans);
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color .16s var(--ease), border-color .16s var(--ease),
+              background-color .16s var(--ease);
+}
+.chip:hover { color: var(--ink); border-color: var(--ink-3); }
+.chip[aria-pressed="true"] {
+  color: var(--accent);
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+}
+
+.bar-end { display: flex; gap: 8px; margin-left: auto; }
+
+.ghost {
+  height: 30px;
+  padding: 0 12px;
+  border: 1px solid var(--line-2);
+  border-radius: 8px;
+  background: none;
+  color: var(--ink-3);
+  font-family: var(--sans);
+  font-size: 12.5px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color .16s var(--ease), border-color .16s var(--ease);
+}
+.ghost:hover { color: var(--ink); border-color: var(--ink-3); }
+.ghost:disabled { opacity: .55; cursor: default; }
+.ghost.icon { width: 32px; padding: 0; display: grid; place-items: center; }
+.ghost.icon svg { width: 16px; height: 16px; }
+.ghost .sun, .ghost .moon { grid-area: 1 / 1; }
+:root[data-theme="dark"]  .ghost .sun  { display: none; }
+:root[data-theme="light"] .ghost .moon { display: none; }
+
+/* 快捷键提示：小屏没用，藏掉 */
+.hint-line {
+  margin: 12px 0 0;
+  font-size: 12px;
+  color: var(--ink-3);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+.hint-line kbd { margin-right: 1px; }
+@media (max-width: 620px) { .hint-line { display: none; } }
+
+/* ── 分组 ───────────────────────────────────────────────────────────────── */
+#entries { margin-top: 40px; }
+
+.group + .group { margin-top: 40px; }
+.group[hidden] { display: none; }
+
+.group-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 10px;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: .11em;
+  color: var(--ink-3);
+}
+.g-name { flex: none; }
+.g-line { flex: 1 1 auto; height: 1px; background: var(--line); }
+.g-count { flex: none; font-family: var(--mono); letter-spacing: 0; }
+
+/* ── 条目 ───────────────────────────────────────────────────────────────── */
+.entry {
+  position: relative;
+  display: grid;
+  grid-template-columns: 34px 1fr 22px;
+  gap: 0 10px;
+  align-items: start;
+  padding: 17px 14px 17px 12px;
+  margin: 0 -12px;
+  border-radius: 11px;
+  border-top: 1px solid var(--line);
+  transition: background-color .18s var(--ease);
+}
+.group .entry:first-of-type { border-top-color: var(--line-2); }
+
+/* 左边那道竖条：hover / 键盘选中时从左边滑进来 */
+.entry::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 12px; bottom: 12px;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform .22s var(--ease);
+}
+
+.entry:hover,
+.entry.is-active { background: var(--accent-soft); }
+.entry:hover::before,
+.entry.is-active::before { transform: scaleX(1); }
+.entry[hidden] { display: none; }
+
+.no {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--ink-3);
+  padding-top: 4px;
+  letter-spacing: .02em;
+  font-variant-numeric: tabular-nums;
+  transition: color .18s var(--ease);
+}
+.entry:hover .no, .entry.is-active .no { color: var(--accent); }
+
+.body { display: block; min-width: 0; }
+
+.top { display: flex; align-items: center; gap: 8px; }
+
+.title {
+  font-size: 16.5px;
+  font-weight: 550;
+  letter-spacing: -.011em;
+  color: var(--ink);
+  transition: color .18s var(--ease);
+}
+.entry:hover .title, .entry.is-active .title { color: var(--accent); }
+
+.dot {
+  flex: none;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  border: 1px solid var(--line-2);
+  background: none;
+  transition: background-color .2s var(--ease), border-color .2s var(--ease);
+}
+.dot[data-state="ok"]   { background: var(--ok);  border-color: var(--ok); }
+.dot[data-state="bad"]  { background: var(--bad); border-color: var(--bad); }
+.dot[data-state="busy"] { background: var(--accent); border-color: var(--accent); animation: pulse 1s ease-in-out infinite; }
+
+@keyframes pulse { 50% { opacity: .3; } }
+
+.desc {
+  display: block;
+  margin-top: 5px;
+  max-width: 64ch;
+  font-size: 14px;
+  line-height: 1.66;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  margin-top: 10px;
+}
+
+.host {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--ink-3);
+}
+.host::after {
+  content: "";
+  display: inline-block;
+  width: 1px; height: 9px;
+  margin-left: 7px;
+  vertical-align: -1px;
+  background: var(--line-2);
+}
+
+.tag {
+  font-size: 10.5px;
+  letter-spacing: .04em;
+  color: var(--ink-3);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 1px 6px;
+  white-space: nowrap;
+  transition: color .18s var(--ease), border-color .18s var(--ease);
+}
+.entry:hover .tag { color: var(--ink-2); border-color: var(--line-2); }
+
+.go {
+  font-size: 14px;
+  color: var(--ink-3);
+  text-align: right;
+  padding-top: 2px;
+  transition: transform .2s var(--ease), color .18s var(--ease);
+}
+.entry:hover .go, .entry.is-active .go {
+  color: var(--accent);
+  transform: translate(2px, -2px);
+}
+
+/* 过滤后一个都不剩 */
+.none {
+  margin: 44px 0 0;
+  padding: 30px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  text-align: center;
+  font-size: 14px;
+  color: var(--ink-3);
+}
+
+/* ── 页脚 ───────────────────────────────────────────────────────────────── */
+.foot {
+  margin-top: 60px;
+  padding: 24px 0 72px;
+  border-top: 1px solid var(--line);
+}
+
+.foot-note {
+  margin: 0;
+  max-width: 62ch;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--ink-3);
+}
+
+.foot-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 9px;
+  margin: 14px 0 0;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--ink-3);
+}
+.foot-meta .sep { color: var(--line-2); }
+.foot-meta time { font-variant-numeric: tabular-nums; }
+
+/* ── 窄屏 ───────────────────────────────────────────────────────────────── */
+@media (max-width: 620px) {
+  body { padding: 0 16px; font-size: 15px; }
+  .masthead { padding-top: 40px; }
+  .lede { margin-top: 20px; font-size: 15px; }
+  .contact { gap: 8px 18px; }
+
+  .bar { margin-top: 28px; }
+  .bar-end { margin-left: 0; width: 100%; }
+
+  .entry { grid-template-columns: 26px 1fr 18px; padding: 15px 12px 15px 10px; }
+  .title { font-size: 15.5px; }
+  .desc { font-size: 13.5px; }
+  .foot { padding-bottom: 48px; }
+}
+
+/* ── 尊重系统的减弱动效设置 ─────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+/* ── 打印：别把深色背景打出来 ───────────────────────────────────────────── */
+@media print {
+  body { background: none; color: #000; padding: 0; }
+  body::before, .bar, .hint-line, .dot, .go { display: none; }
+  .entry { break-inside: avoid; border-top-color: #ccc; }
+}

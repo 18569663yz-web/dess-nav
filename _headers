@@ -1,0 +1,26 @@
+# Cloudflare Pages / Workers 静态资源会读这个文件。
+# 规则按顺序匹配，同名的头以先命中的为准 —— 所以具体的写在前面，/* 兜底放最后。
+
+/styles.css
+  Cache-Control: public, max-age=300, must-revalidate
+
+/boot.js
+  Cache-Control: public, max-age=300, must-revalidate
+
+/app.js
+  Cache-Control: public, max-age=300, must-revalidate
+
+/favicon.svg
+  Cache-Control: public, max-age=86400
+
+/og.png
+  Cache-Control: public, max-age=86400
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: geolocation=(), camera=(), microphone=(), payment=(), usb=()
+  # connect-src 放开 https: 是给「检查可达性」用的：那些请求由浏览器直接发往
+  # 各个站点，不经过任何中间层。其余一律收紧到本站。
+  Content-Security-Policy: default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src https:; manifest-src 'self'

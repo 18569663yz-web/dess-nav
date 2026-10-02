@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="zh-CN" data-lang="zh" data-theme="dark"
+      data-doc-title-zh="Dess · 工具索引"
+      data-doc-title-en="Dess · Tool Index"
+      data-doc-desc-zh="Dess 做过的工具和站点：链上只读工具、实用小工具、DeepSeek Harness 插件。全部纯静态，打开就能用。"
+      data-doc-desc-en="Tools and sites by Dess: read-only on-chain utilities, small practical tools, and DeepSeek Harness plugins. All pure static — open and use.">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Dess · 工具索引</title>
+<meta name="description" content="Dess 做过的工具和站点：链上只读工具、实用小工具、DeepSeek Harness 插件。全部纯静态，打开就能用。">
+
+<link rel="canonical" href="https://dess.lol/">
+<link rel="alternate" hreflang="zh-CN" href="https://dess.lol/">
+<link rel="alternate" hreflang="en" href="https://dess.lol/?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://dess.lol/">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0b0b0d" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f7f5f2" media="(prefers-color-scheme: light)">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Dess">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:title" content="Dess · 工具索引">
+<meta property="og:description" content="链上只读工具、实用小工具、DeepSeek Harness 插件。全部纯静态，打开就能用。">
+<meta property="og:url" content="https://dess.lol/">
+<meta property="og:image" content="https://dess.lol/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@Despite_zmw">
+<meta name="twitter:creator" content="@Despite_zmw">
+<meta name="twitter:title" content="Dess · 工具索引">
+<meta name="twitter:description" content="链上只读工具、实用小工具、DeepSeek Harness 插件。全部纯静态，打开就能用。">
+<meta name="twitter:image" content="https://dess.lol/og.png">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="favicon.svg">
+<link rel="stylesheet" href="styles.css">
+<script src="boot.js"></script>
+</head>
+
+<body>
+<a class="skip" href="#entries"><span data-l="zh">跳到列表</span><span data-l="en">Skip to list</span></a>
+
+<div class="page">
+
+  <!-- ── 抬头 ─────────────────────────────────────────── -->
+  <header class="masthead">
+    <div class="who">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="30" height="30">
+          <path d="M9.6 25.6V6.4h6.5a9.6 9.6 0 0 1 0 19.2H9.6Z"
+                fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+          <circle cx="16.3" cy="16" r="2.5" fill="currentColor"/>
+        </svg>
+      </span>
+      <span class="who-text">
+        <h1>Dess</h1>
+        <p class="role"><span data-l="zh">AI 开发者 · 做链上和工具类的小东西</span><span data-l="en">AI developer · building on-chain and tool-class odds and ends</span></p>
+      </span>
+    </div>
+
+    <p class="lede"><span data-l="zh">下面每一个都能直接打开用。全部是纯静态页面——没有后端、不用登录、不埋统计。链接就是全部，分享给谁都能打开。</span><span data-l="en">Everything below opens and just works. All of it is pure static pages — no backend, no sign-in, no analytics. The link is the whole product, and it opens for whoever you send it to.</span></p>
+
+    <nav class="contact" data-aria-zh="联系方式" data-aria-en="Contact">
+      <a href="https://x.com/Despite_zmw" target="_blank" rel="me noopener">
+        <span class="k">X</span><span class="v">@Despite_zmw</span>
+      </a>
+      <a href="https://t.me/Despite_zmw" target="_blank" rel="me noopener">
+        <span class="k">Telegram</span><span class="v">@Despite_zmw</span>
+      </a>
+      <a href="https://github.com/18569663yz-web" target="_blank" rel="me noopener">
+        <span class="k">GitHub</span><span class="v">18569663yz-web</span>
+      </a>
+    </nav>
+  </header>
+
+  <!-- ── 工具条 ───────────────────────────────────────── -->
+  <div class="bar">
+    <div class="field">
+      <label class="search" for="q">
+        <svg class="mag" viewBox="0 0 20 20" aria-hidden="true">
+          <circle cx="8.6" cy="8.6" r="5.4" fill="none" stroke="currentColor" stroke-width="1.7"/>
+          <path d="m12.8 12.8 4 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+        </svg>
+        <input id="q" type="search" autocomplete="off" spellcheck="false"
+               placeholder="搜名字、域名或标签"
+               aria-label="搜索站点"
+               data-ph-zh="搜名字、域名或标签"   data-ph-en="Search a name, domain or tag"
+               data-aria-zh="搜索站点"           data-aria-en="Search sites">
+        <kbd class="hint">/</kbd>
+      </label>
+      <button id="clear" class="clear" type="button" hidden
+              aria-label="清空搜索"
+              data-aria-zh="清空搜索" data-aria-en="Clear search">×</button>
+    </div>
+
+    <div class="chips" role="group" aria-label="按分类筛选"
+         data-aria-zh="按分类筛选" data-aria-en="Filter by category">
+      <button class="chip" type="button" data-cat="all"   aria-pressed="true" ><span data-l="zh">全部</span><span data-l="en">All</span></button>
+      <button class="chip" type="button" data-cat="chain" aria-pressed="false"><span data-l="zh">链上</span><span data-l="en">On-chain</span></button>
+      <button class="chip" type="button" data-cat="tool"  aria-pressed="false"><span data-l="zh">工具</span><span data-l="en">Utilities</span></button>
+      <button class="chip" type="button" data-cat="dsh"   aria-pressed="false"><span data-l="zh">DSH 插件</span><span data-l="en">DSH plugins</span></button>
+      <button class="chip" type="button" data-cat="src"   aria-pressed="false"><span data-l="zh">源码</span><span data-l="en">Source</span></button>
+    </div>
+
+    <div class="bar-end">
+      <button id="lang" class="ghost" type="button" aria-label="Switch language">EN</button>
+      <button id="probe" class="ghost" type="button"
+              title="逐个探测这些站点现在通不通"
+              data-title-zh="逐个探测这些站点现在通不通"
+              data-title-en="Probe each of these sites right now"><span id="probe-label">检查可达性</span></button>
+      <button id="theme" class="ghost icon" type="button" aria-label="切换深浅色"
+              data-aria-zh="切换深浅色" data-aria-en="Toggle light or dark mode">
+        <svg class="sun" viewBox="0 0 20 20" aria-hidden="true">
+          <circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M10 2v2M10 16v2M2 10h2M16 10h2M4.3 4.3l1.4 1.4M14.3 14.3l1.4 1.4M15.7 4.3l-1.4 1.4M5.7 14.3l-1.4 1.4"
+                stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <svg class="moon" viewBox="0 0 20 20" aria-hidden="true">
+          <path d="M16.4 12.3A7 7 0 0 1 7.7 3.6a7 7 0 1 0 8.7 8.7Z"
+                fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <p class="hint-line" id="hint-line">
+    <span data-l="zh"><kbd>/</kbd> 搜索 · <kbd>↑</kbd><kbd>↓</kbd> 选择 · <kbd>↵</kbd> 打开 · <kbd>esc</kbd> 清空</span>
+    <span data-l="en"><kbd>/</kbd> search · <kbd>↑</kbd><kbd>↓</kbd> move · <kbd>↵</kbd> open · <kbd>esc</kbd> clear</span>
+  </p>
+
+  <!-- ── 列表 ─────────────────────────────────────────── -->
+  <main id="entries">
+
+    <section class="group" data-group="chain">
+      <h2 class="group-head"><span class="g-name"><span data-l="zh">链上工具</span><span data-l="en">On-chain tools</span></span><i class="g-line"></i><span class="g-count">3</span></h2>
+
+      <a class="entry" href="https://poolwatch.dess.lol" target="_blank" rel="noopener"
+         data-cat="chain"
+         data-search="uniswap v3 未领取手续费 poolwatch dess.lol 以太坊 eth 链上 只读 流动性 lp"
+         data-search-en="uniswap v3 unclaimed fees poolwatch dess.lol ethereum eth on-chain read-only liquidity lp">
+        <span class="no">01</span>
+        <span class="body">
+          <span class="top">
+            <span class="title"><span data-l="zh">Uniswap V3 未领取手续费</span><span data-l="en">Unclaimed Uniswap V3 fees</span></span>
+            <span class="dot" data-state="unknown"></span>
+          </span>
+          <span class="desc"><span data-l="zh">输入任意以太坊地址，看它从没领过的 V3 LP 手续费有多少。数字直接由池子余额算出来，所以给的是下限，不是估算。</span><span data-l="en">Paste any Ethereum address and see how much V3 LP fee it has never collected. The figure comes straight out of pool balances, so it is a lower bound, not an estimate.</span></span>
+          <span class="meta">
+            <span class="host">poolwatch.dess.lol</span>
+            <span class="tag"><span data-l="zh">以太坊</span><span data-l="en">Ethereum</span></span><span class="tag"><span data-l="zh">Uniswap V3</span><span data-l="en">Uniswap V3</span></span><span class="tag"><span data-l="zh">只读</span><span data-l="en">Read-only</span></span>
+          </span>
+        </span>
+        <span class="go" aria-hidden="true">↗</span>
+      </a>
+
+      <a class="entry" href="https://imd.kymmppee.xyz" target="_blank" rel="noopener"
+         data-cat="chain"
+         data-search="imd pool4 烧毁引擎 仪表盘 kymmppee 以太坊 uniswap v4 双语 只读 burn"
+         data-search-en="imd pool4 burn engine dashboard kymmppee ethereum uniswap v4 bilingual read-only burn">
+        <span class="no">02</span>
+        <span class="body">
+          <span class="top">
+            <span class="title"><span data-l="zh">IMD · POOL4 烧毁引擎仪表盘</span><span data-l="en">IMD · POOL4 burn-engine dashboard</span></span>
+            <span class="dot" data-state="unknown"></span>
+          </span>
+          <span class="desc"><span data-l="zh">只读双语仪表盘，回答官方页面没回答的问题：烧毁引擎还在工作吗，停了的话还差多少重新点火。每个数字都能溯源到合约函数。</span><span data-l="en">A read-only bilingual dashboard for the question the official page leaves open: is the burn engine still running, and if it has stalled, how much more it takes to relight. Every number traces back to a contract function.</span></span>
+          <span class="meta">
+            <span class="host">imd.kymmppee.xyz</span>
+            <span class="tag"><span data-l="zh">以太坊</span><span data-l="en">Ethereum</span></span><span class="tag"><span data-l="zh">Uniswap v4</span><span data-l="en">Uniswap v4</span></span><span class="tag"><span data-l="zh">中英双语</span><span data-l="en">Bilingual</span></span>
+          </span>
+        </span>
+        <span class="go" aria-hidden="true">↗</span>
+      </a>
+
+      <a class="entry" href="https://check.kymmppee.xyz" target="_blank" rel="noopener"
+         data-cat="chain"
+         data-search="shhhhh 空投 名单 sp1 静默支付 比特币 bip-352 批量 查询 白名单 kymmppee check 在册 被移除"
+         data-search-en="shhhhh airdrop list sp1 silent payments bitcoin bip-352 batch check whitelist kymmppee on-list removed">
+        <span class="no">03</span>
+        <span class="body">
+          <span class="top">
+            <span class="title"><span data-l="zh">$shhhhh 空投名单批量查询</span><span data-l="en">$shhhhh airdrop-list batch checker</span></span>
+            <span class="dot" data-state="unknown"></span>
+          </span>
+          <span class="desc"><span data-l="zh">一次粘一批 sp1 静默支付地址，看哪些在名单上，按在册 / 被移除 / 没提交过分好类。只读、不连钱包，中英双语可切换。</span><span data-l="en">Paste a batch of sp1 silent-payment addresses and see which are on the list, sorted into on-list / removed / never submitted. Read-only, no wallet connection, switchable Chinese and English.</span></span>
+          <span class="meta">
+            <span class="host">check.kymmppee.xyz</span>
+            <span class="tag"><span data-l="zh">比特币</span><span data-l="en">Bitcoin</span></span><span class="tag"><span data-l="zh">BIP-352</span><span data-l="en">BIP-352</span></span><span class="tag"><span data-l="zh">中英双语</span><span data-l="en">Bilingual</span></span>
+          </span>
+        </span>
+        <span class="go" aria-hidden="true">↗</span>
+      </a>
+    </section>
+
+    <section class="group" data-group="tool">
+      <h2 class="group-head"><span class="g-name"><span data-l="zh">实用工具</span><span data-l="en">Utilities</span></span><i class="g-line"></i><span class="g-count">1</span></h2>
+
+      <a class="entry" href="https://douyin.kymmppee.xyz" target="_blank" rel="noopener"
+         data-cat="tool"
+         data-search="抖音 去水印 无水印 下载 视频 douyin kymmppee 工具 nowm"
+         data-search-en="douyin watermark watermark-free download video kymmppee tool nowm">
+        <span class="no">04</span>
+        <span class="body">
+          <span class="top">
+            <span class="title"><span data-l="zh">抖音无水印下载</span><span data-l="en">Douyin downloader, no watermark</span></span>
+            <span class="dot" data-state="unknown"></span>
+          </span>
+          <span class="desc"><span data-l="zh">粘贴分享链接，直接拿到无水印的原视频。带后台，能看每条解析通道的用量和限流状态——被限了也知道是被谁限的。</span><span data-l="en">Paste a share link and get the original video back without the watermark. Ships with an admin panel showing each resolver channel's load and throttle state — if you get rate-limited, you can see who did it.</span></span>
+          <span class="meta">
+            <span class="host">douyin.kymmppee.xyz</span>
+            <span class="tag"><span data-l="zh">视频</span><span data-l="en">Video</span></span><span class="tag"><span data-l="zh">自建后台</span><span data-l="en">Self-hosted admin</span></span>
+          </span>
+        </span>
+        <span class="go" aria-hidden="true">↗</span>
+      </a>
+    </section>
+
+    <section class="group" data-group="dsh">
+      <h2 class="group-head"><span class="g-name"><span data-l="zh">DSH 插件</span><span data-l="en">DSH plugins</span></span><i class="g-line"></i><span class="g-count">2</span></h2>
+
+      <a class="entry" href="https://awesome-dsh-plugin.com" target="_blank" rel="noopener"
+         data-cat="dsh"
+         data-search="awesome dsh plugin deepseek harness 插件 列表 精选 awesome-dsh-plugin.com 目录"
+         data-search-en="awesome dsh plugin deepseek harness plugins list curated awesome-dsh-plugin.com directory">
+        <span class="no">05</span>
+        <span class="body">
+          <span class="top">
+            <span class="title"><span data-l="zh">Awesome DSH Plugin</span><span data-l="en">Awesome DSH Plugin</span></span>
+            <span class="dot" data-state="unknown"></span>
+          </span>
+          <span class="desc"><span data-l="zh">DeepSeek Harness 社区插件精选列表，站点由仓库自动构建。每条收录都对着源码核过：描述里说的是什么，就应该装得出来什么。</span><span data-l="en">A curated list of DeepSeek Harness community plugins; the site is built from the repo. Every entry was checked against its source: whatever the description promises is what the install should hand you.</span></span>
+          <span class="meta">
+            <span class="host">awesome-dsh-plugin.com</span>
+            <span class="tag"><span data-l="zh">列表</span><span data-l="en">List</span></span><span class="tag"><span data-l="zh">自动构建</span><span data-l="en">Auto-built</span></span>
+          </span>
+        </span>
+        <span class="go" aria-hidden="true">↗</span>
+      </a>
+
+      <a class="entry" href="https://github.com/18569663yz-web/dsh-plugin-crypto-ticker" target="_blank" rel="noopener"
+         data-cat="dsh"
+         data-search="crypto ticker 行情 插件 侧边栏 btc eth sol jup 零依赖 dsh 价格 走势图"
+         data-search-en="crypto ticker markets plugin sidebar btc eth sol jup zero-dependency dsh price sparkline">
+        <span class="no">06</span>
+        <span class="body">
+          <span class="top">
+            <span class="title"><span data-l="zh">dsh-plugin-crypto-ticker</span><span data-l="en">dsh-plugin-crypto-ticker</span></span>
+            <span class="dot" data-state="unknown"></span>
+          </span>
+          <span class="desc"><span data-l="zh">侧边栏左下角的实时行情卡片：BTC / ETH / SOL / JUP 的价格、24 小时涨跌和迷你走势。零依赖、免密钥，数据源自动降级。</span><span data-l="en">A live market card in the bottom-left of the sidebar: BTC / ETH / SOL / JUP prices, 24-hour change, and a mini sparkline. Zero dependencies, no API key, and it falls back between data sources on its own.</span></span>
+          <span class="meta">
+            <span class="host">github.com</span>
+            <span class="tag"><span data-l="zh">DSH 插件</span><span data-l="en">DSH plugin</span></span><span class="tag"><span data-l="zh">行情</span><span data-l="en">Markets</span></span>
+          </span>
+        </span>
+        <span class="go" aria-hidden="true">↗</span>
+      </a>
+    </section>
+
+    <section class="group" data-group="src">
+      <h2 class="group-head"><span class="g-name"><span data-l="zh">源码</span><span data-l="en">Source</span></span><i class="g-line"></i><span class="g-count">2</span></h2>
+
+      <a class="entry" href="https://github.com/18569663yz-web/poolwatch" target="_blank" rel="noopener"
+         data-cat="src"
+         data-search="poolwatch 源码 仓库 github site app.js kernel keccak rpc v3fees"
+         data-search-en="poolwatch source repository github site app.js kernel keccak rpc v3fees">
+        <span class="no">07</span>
+        <span class="body">
+          <span class="top">
+            <span class="title"><span data-l="zh">poolwatch · 源码</span><span data-l="en">poolwatch · source</span></span>
+            <span class="dot" data-state="unknown"></span>
+          </span>
+          <span class="desc"><span data-l="zh">仓库本身就是线上站点：没有构建步骤、没有打包器，你 clone 到的字节和浏览器下载到的完全一致。手续费那套 Q128 数学在 <code>kernel/</code> 里。</span><span data-l="en">The repository <em>is</em> the live site: no build step, no bundler — the bytes you clone are the bytes the browser downloads. The Q128 fee math lives in <code>kernel/</code>.</span></span>
+          <span class="meta">
+            <span class="host">github.com</span>
+            <span class="tag"><span data-l="zh">无构建</span><span data-l="en">No build</span></span><span class="tag"><span data-l="zh">JavaScript</span><span data-l="en">JavaScript</span></span>
+          </span>
+        </span>
+        <span class="go" aria-hidden="true">↗</span>
+      </a>
+
+      <a class="entry" href="https://github.com/18569663yz-web/pool4-dashboard" target="_blank" rel="noopener"
+         data-cat="src"
+         data-search="pool4 dashboard 源码 仓库 github imd 合约 abi 双语 快照"
+         data-search-en="pool4 dashboard source repository github imd contracts abi bilingual snapshot">
+        <span class="no">08</span>
+        <span class="body">
+          <span class="top">
+            <span class="title"><span data-l="zh">pool4-dashboard · 源码</span><span data-l="en">pool4-dashboard · source</span></span>
+            <span class="dot" data-state="unknown"></span>
+          </span>
+          <span class="desc"><span data-l="zh">仪表盘的合约注册表、ABI、前瞻模拟器和 30 个只读脚本都在这里。页面上任何一条断言，都能拿这些脚本回链上重跑一遍。</span><span data-l="en">The dashboard's contract registry, ABIs, look-ahead simulator and 30 read-only scripts all live here. Any claim that page makes can be re-run against the chain with these.</span></span>
+          <span class="meta">
+            <span class="host">github.com</span>
+            <span class="tag"><span data-l="zh">只读脚本</span><span data-l="en">Read-only scripts</span></span><span class="tag"><span data-l="zh">JavaScript</span><span data-l="en">JavaScript</span></span>
+          </span>
+        </span>
+        <span class="go" aria-hidden="true">↗</span>
+      </a>
+    </section>
+
+  </main>
+
+  <p class="none" id="none" hidden><span data-l="zh">没有匹配的条目。换个词，或者点「全部」。</span><span data-l="en">Nothing matched. Try another word, or hit “All”.</span></p>
+
+  <!-- ── 页脚 ─────────────────────────────────────────── -->
+  <footer class="foot">
+    <p class="foot-note"><span data-l="zh">纯静态单页：没有后端、没有 Cookie、没有第三方脚本。搜索词和主题只存在你自己的浏览器里。</span><span data-l="en">One pure-static page: no backend, no cookies, no third-party scripts. Your search terms and theme stay in your own browser.</span></p>
+    <p class="foot-meta">
+      <span>© <span id="year">2026</span> Dess</span>
+      <span class="sep">·</span>
+      <span><span data-l="zh">最后更新 </span><span data-l="en">Last updated </span><time datetime="2026-10-02">2026-10-02</time></span>
+      <span class="sep">·</span>
+      <span id="probe-note"></span>
+    </p>
+  </footer>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
