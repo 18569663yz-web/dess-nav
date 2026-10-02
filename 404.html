@@ -1,0 +1,57 @@
+<!doctype html>
+<!-- ============================================================================
+     为什么需要这个文件：Cloudflare Pages 在没有 404.html 的时候，会把任何
+     没匹配上的路径用 200 状态返回根 index.html。结果是 /随便什么 都会被搜索
+     引擎当成一页真实内容收录，而那一页的 canonical 指向首页 —— 等于凭空多出
+     一堆重复页面。有了 404.html，Pages 才会真的回 404，并且带上 no-store。
+     这个文件里的路径全部用绝对路径（/styles.css 而不是 styles.css），因为它
+     可能在任意深度被服务到（/a/b/c 时相对路径会算错）。
+     ========================================================================= -->
+<html lang="zh-CN" data-lang="zh" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>404 · Dess</title>
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0b0b0d" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f7f5f2" media="(prefers-color-scheme: light)">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/favicon.svg">
+<link rel="stylesheet" href="/styles.css">
+<!-- boot.js 只负责在首次绘制前定好主题和语言，不依赖页面里任何元素 -->
+<script src="/boot.js"></script>
+</head>
+
+<body>
+
+<div class="page">
+
+  <header class="masthead">
+    <div class="who">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="30" height="30">
+          <path d="M9.6 25.6V6.4h6.5a9.6 9.6 0 0 1 0 19.2H9.6Z"
+                fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+          <circle cx="16.3" cy="16" r="2.5" fill="currentColor"/>
+        </svg>
+      </span>
+      <span class="who-text">
+        <h1>404</h1>
+        <p class="role"><span data-l="zh">这个路径不存在</span><span data-l="en">No such page</span></p>
+      </span>
+    </div>
+
+    <p class="lede"><span data-l="zh">地址可能打错了，也可能那个工具已经下线或者改了域名。索引页里有全部还在的东西。</span><span data-l="en">The address may be mistyped, or that tool may have been retired or moved. The index has everything that is still up.</span></p>
+
+    <nav class="contact">
+      <a href="/"><span class="k">←</span><span class="v"><span data-l="zh">回到工具索引</span><span data-l="en">Tool index</span></span></a>
+    </nav>
+  </header>
+
+</div>
+
+</body>
+</html>
