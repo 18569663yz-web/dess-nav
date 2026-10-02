@@ -1,4 +1,6 @@
-# Cloudflare Pages / Workers 静态资源会读这个文件。
+# 这个文件被 Cloudflare Pages / Workers 和 Netlify 读取，两家语法一致（# 注释、/* 通配）。
+# 注意：GitHub Pages 不读它 —— 换托管时先确认对方支不支持，否则整套安全头会静默失效。
+# 另外 HTML 里没有 meta CSP 兜底（grep http-equiv 是 0 命中），这里就是唯一一份。
 # 规则按顺序匹配，同名的头以先命中的为准 —— 所以具体的写在前面，/* 兜底放最后。
 
 /styles.css
