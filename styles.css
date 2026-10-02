@@ -160,6 +160,12 @@ kbd {
   border-radius: 12px;
   color: var(--accent);
   background: var(--bg-lift);
+  overflow: hidden;          /* 把头像裁进这枚圆角方框里 */
+}
+.mark img {
+  display: block;
+  width: 100%; height: 100%;
+  object-fit: cover;
 }
 
 .who-text h1 {

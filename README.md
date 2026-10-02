@@ -17,8 +17,9 @@
 | `boot.js` | 只做一件事：在首次绘制前把主题和语言定下来，避免刷新时闪底色、闪中文。必须在 `<head>` 里同步加载 |
 | `app.js` | 筛选、键盘操作、主题切换、可达性探测 |
 | `favicon.svg` | 图标（SVG，不依赖任何位图） |
+| `avatar.jpg` | 抬头那个 192×192 的头像。由根目录的 `make-avatar.py` 产出，别直接手改 |
 | `og.png` | 分享图，1200×630 |
-| `_headers` | Cloudflare 专用：安全响应头 + 缓存策略 |
+| `_headers` | 安全响应头 + 缓存策略。Cloudflare Pages / Workers 与 Netlify 都读，GitHub Pages 不读 |
 | `robots.txt` | 允许全站抓取 |
 
 ## 本地预览
@@ -61,13 +62,15 @@ python -m http.server 8080
 
 ## 自检
 
-仓库上一级目录（`ZRC\`）下有三个开发脚本，都不参与部署：
+仓库上一级目录（`ZRC\`）下有五个开发脚本，都不参与部署：
 
 | 脚本 | 作用 |
 | --- | --- |
 | `verify.py` | 用无头 Chrome 跑三轮断言：中文交互、中文 + `_headers` 里那份**真实** CSP、英文 + 同一份 CSP。每轮 60 项，共 180 项 |
 | `probe-layout.py` | 量指定视口下的真实几何，找横向溢出的元凶。`python probe-layout.py 390` |
-| `make-og.py` | 重新生成 `og.png` |
+| `make-og.py` | 重新生成 `og.png`（抬头那张头像也贴进分享图，跟页面保持一致） |
+| `make-avatar.py` | 把头图裁成方图并压到 192×192，输出 `dess-nav/avatar.jpg`。`python make-avatar.py [源图]` |
+| `shot-nav.py` | 出四张截图：中文深色、中文浅色、英文深色、390px 移动端 |
 
 ```bash
 python verify.py          # 期望输出：全部通过
@@ -150,11 +153,11 @@ python make-og.py
   等宽字体是「这里有台机器」的信号，滥用就变成程序员审美模板了。
 - **hover 时左边滑出的一道竖条**是唯一的主视觉动效，其余都克制。
 - **不做「点击复制」、不做「访问量」、不做「最近更新」徽章** ——
-  一个只有 8 条链接的页面不需要这些。
+  一个只有 7 条链接的页面不需要这些。
 - 深色是默认，但跟随系统 `prefers-color-scheme`，手动切过之后记进 `localStorage`。
 - **英文不是「翻译版」而是同一页面的另一个界面语言** —— 没有 `/en/` 子目录、没有
   第二份 HTML，SEO 靠 `<link rel="alternate" hreflang>` 指向 `?lang=en`。
-  一个只有八条链接的页面不值得维护两棵树。
+  一个只有七条链接的页面不值得维护两棵树。
 - 「检查可达性」用 `no-cors` 请求探测，**读不到状态码**，只能区分
   「网络层通了」和「连不上/超时」。所以页脚写的是「够得着」而不是「200」，
   别把它当成监控。
